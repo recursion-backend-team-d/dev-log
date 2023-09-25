@@ -18,33 +18,50 @@
 - stage 2 の読み合わせ？
 - 今後の開発スケジュール決定
 - 作業分担
-- UMLとか書く？？
+- UMLとか書く
 
 #### 決定事項
 - mabuoさんのベースで進めてく
 - RoomNamesはUTF-8でエンコード/デコードされます。OperationPayloadは、操作と状態に応じて異なる方法でデコードされる可能性があります（整数、文字列、JSONファイルなど）
   - すべての操作でJSON形式
+- import secretsでtoken生成
+- プロトコル（statusはHTTP status参照）
 ```json
 // op 1
   // サーバの初期化（0）
   {
     "roomName": "example"
+    "username": "example"
   }
 
   // リクエストの応答（1）
   {
-    "status": 200,
+    "status": 202,
     "message": "example message"
+  }
+
+  // リクエストの完了（2）
+  {
+    "status": 201,
+    "message": "example message"
+  }
+
+  // op2
+  {
+    "roomName": "example"
+    "username": "example"
   }
 ```
 
 #### 共有事項
+なし
 
 #### 今後の予定
 - 入力の検証してPR出す（mabuo）
 - TODO テスト（オフィスアワーで質問する）
 - プロトコルのヘッダーでStateが何を示しているのか解決する
-- 
+- MermaidでClass図を書いてみよう（all）
+- 9/27 20:00~21:00（Class図を書いてみる）
 
 ### 2023-09-23
 #### やったこと
@@ -65,7 +82,7 @@
     <br>`git switch -c feat-hoge`
   - commit messege
     <br>`git commit -m "何やった #Issue"`
- 
+
 - レビュー観点
   - 関数名とか変数名の命名が適切か
   - 例外処理ができてるか
@@ -74,14 +91,14 @@
 
 - タスク管理
   - ~Trello,~ GitHub Projects
- 
+
 - グループミーティング
   - 週３回
   - 20:00~21:00
- 
+
 - 環境
   - devcontainer
- 
+
 - CI / CD
   - GitHub Actions (TODO)
   - husky
