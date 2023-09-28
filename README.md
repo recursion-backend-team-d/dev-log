@@ -47,7 +47,7 @@
 - import secretsでtoken生成
 - プロトコル（statusはHTTP status参照）
 ```json
-// op 1
+// op 1, op 2
   // サーバの初期化（0）
   {
     "roomName": "example"
@@ -64,12 +64,6 @@
   {
     "status": 201,
     "message": "example message"
-  }
-
-  // op2
-  {
-    "roomName": "example"
-    "username": "example"
   }
 ```
 
