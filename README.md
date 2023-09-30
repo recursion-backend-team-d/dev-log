@@ -36,7 +36,9 @@
 ```
 
 - Client側でbind(('localhost', 0)) -> TCPでリクエストを送るときに、UDPのIPとポートも一緒に送る
-  - Server側でChatClientをインスタンス化 
+  - Server側でChatClientをインスタンス化
+- ChatRoom
+  - self.rooms[room_name.decode()].broadcast(address, token, msg.decode())
 - ChatClient
   - init(name, address, token, is_host)
 - Server
@@ -50,9 +52,13 @@
   - self.udp_socket.bind(('', 0))
   - ポート 0 を指定することで空いているポートが指定される。
   - 勝手にbindしてくれる？？
+- akibaさん 10/2, 10/3はMTG参加不可
+- README更新
+- UDPの時はBUFFER_SIZE分を一気にrecvfromする
+- payloadのroomNameは削除
 
 #### 今後の予定
-- 
+- 次回のMTG 10/2 20:00 ~ 21:00 (とりあえず担当範囲は完成が目標)
 
 ### オフィスアワー
 - 非機能要件のテストはどのように行うか。毎秒10000パケットの送信。1000人の同時接続。
@@ -124,7 +130,6 @@
 // op 1, op 2
   // サーバの初期化（0）
   {
-    "roomName": "example"
     "username": "example"
     "ip": "",
     "port": "",
