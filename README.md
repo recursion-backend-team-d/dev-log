@@ -8,6 +8,52 @@
 #### 今後の予定
 -->
 
+### 2023-09-30
+#### 目標
+- 進捗の共有
+  - 共有内容に対して疑問点があれば確認
+- つまずいている点の解決
+- 今後の予定の確認
+- 次回のMTGの日程設定
+
+#### 決定事項
+- サーバーのレスポンスについてもrequestと同様のプロトコル （送受信）
+  - ヘッダー（32バイト）：RoomNameSize（1バイト） | Operation（1バイト） | State（1バイト） | OperationPayloadSize（29バイト）
+  - ボディ：最初のRoomNameSizeバイトがルーム名で、その後にOperationPayloadSizeバイトが続きます。ルーム名の最大バイト数は2^8バイトであり、OperationPayloadSizeの最大バイト数は2^29バイトです。
+  - ボディはjson.dumpsでエンコード
+- struct.pack, struct.unpackで、request, responseを扱う
+- サーバのTCPソケットは8000番、UDPソケットは9000番
+- ユニットテストは無し
+- UDPのプロトコル (送受信)
+  - Client側でメッセージのサイズを検証。4096を超えたら再入力を促す。
+  - ヘッダー：RoomNameSize（1バイト）| TokenSize（1バイト）
+  - ボディ：最初のRoomNameSizeバイトはルーム名、次のTokenSizeバイトはトークン文字列、そしてその残りが実際のメッセージです。
+```json
+{
+  "sender": "example sender",
+  "message": "example"
+}
+```
+
+- Client側でbind(('localhost', 0)) -> TCPでリクエストを送るときに、UDPのIPとポートも一緒に送る
+  - Server側でChatClientをインスタンス化 
+- ChatClient
+  - init(name, address, token, is_host)
+- Server
+  - notify_available_rooms実装なし （今後実装あるかも）
+- Serverでエラーが起きた時（op = 1ですでにroom_nameが存在する時など）は失敗statusを返す
+  - statusコードは今後決める。Client側では送られてきたメッセージを出力したりする
+
+#### 共有事項
+- bind
+  - どのポートで受け取るのか指定
+  - self.udp_socket.bind(('', 0))
+  - ポート 0 を指定することで空いているポートが指定される。
+  - 勝手にbindしてくれる？？
+
+#### 今後の予定
+- 
+
 ### オフィスアワー
 - 非機能要件のテストはどのように行うか。毎秒10000パケットの送信。1000人の同時接続。
   - UDPソケットを使うだけで満たせる。テストをあえてするなら、反復的にメッセージを送り出すプログラムを作成する。ネットワーキングツールも使えるが依存性の問題もあり、今回の規模では必要ない。
@@ -80,6 +126,8 @@
   {
     "roomName": "example"
     "username": "example"
+    "ip": "",
+    "port": "",
   }
 
   // リクエストの応答（1）
