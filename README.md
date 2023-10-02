@@ -8,6 +8,26 @@
 #### 今後の予定
 -->
 
+### 2023-10-02
+#### 目標
+- 今後の予定確認
+  - stage 3
+- 次回MTGの日程
+
+#### 決定事項
+- 10/5 20:00 ~ 21:00 (タスク大体できてる感じ)
+
+#### 共有事項
+- クライアントのTCPにタイムアウト設定？
+
+#### 今後の予定
+  - password - kara
+  - desktop app for client 
+    - front - aki
+    - back - mabuo
+  - devcontainerでnode - kara
+  - electronの雛形 - kara
+
 ### 2023-09-30
 #### 目標
 - 進捗の共有
