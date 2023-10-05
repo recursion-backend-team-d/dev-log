@@ -19,9 +19,13 @@
 #### 共有事項
 
 #### 今後の予定
-- TCPタイムアウトの設定
-- Serverのリファクタ
-- 入室可能なルームをサーバからクライアントへ通知
+- 10/6 20:00~21:00 Electronの結合
+  - Electronでpassword - mabuo / akiba
+  - deploy関係
+- TCPタイムアウトの設定 - mabuo (client), kara (server)
+- Serverのリファクタ - kara
+- 入室可能なルームをサーバからクライアントへ通知 - TODO
+- メッセージの暗号化 - TODO
 
 ### 2023-10-02
 #### 目標
