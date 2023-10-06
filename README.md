@@ -14,13 +14,14 @@
 #### 決定事項
 #### 共有事項
 #### 今後の予定
-- deploy関係 (server deploy, client installer) TODO
-- TCPタイムアウトの設定 - mabuo (client)
-- UI kaizen
-  - チャット欄にメッセージが増えたら、チャットランそれ自体をスクロール可能にする
-  - username, room_nameを修正可能にする
-- 入室可能なルーム（パスワード保護の有無）をサーバからクライアントへ通知
-  - 通知のタイミング（TCPの接続確立直後にサーバから送る）
+- deploy関係 (server deploy ec2? ecr?, client installer) TODO (Sunday)
+- メッセージの暗号化 - TODO (Sunday)
+1. 入室可能なルーム（パスワード保護の有無）とルームのメンバをサーバからクライアントへ通知
+  - 通知のタイミング（TCPの接続確立直後にサーバから送る）　- server (kara), electron (mabuo)
+2. UI kaizen
+  2. Errorのユーザへの通知の仕方
+  1. チャット欄にメッセージが増えたら、チャットランそれ自体をスクロール可能にする
+  3. 入室可能なルーム一覧ページ、チャットルームのメンバ一覧ページ
 ```
 CREATE ROOM
 ROOM1    ROOM2    ROOM3...
@@ -38,15 +39,12 @@ ROOM5    ROOM6...
   ]
 }
 ```
-- 入室可能なルーム、ルームのメンバ一覧
-- メッセージの暗号化 - TODO
 ```json
 // 通常メッセージ
 {
   "sender": "example sender",
   "message": "example"
 }
-
 // システム
 // ヘッダー：RoomNameSize（1バイト）| TokenSize（1バイト）
 // operation 1(入室), 2（退室）
