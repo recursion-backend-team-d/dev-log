@@ -14,17 +14,48 @@
 #### 決定事項
 #### 共有事項
 #### 今後の予定
-- deploy関係
-- TCPタイムアウトの設定 - mabuo (client), kara (server)
+- deploy関係 (server deploy, client installer) TODO
+- TCPタイムアウトの設定 - mabuo (client)
 - UI kaizen
   - チャット欄にメッセージが増えたら、チャットランそれ自体をスクロール可能にする
   - username, room_nameを修正可能にする
 - 入室可能なルーム（パスワード保護の有無）をサーバからクライアントへ通知
   - 通知のタイミング（TCPの接続確立直後にサーバから送る）
-  - 
-```json
 ```
+CREATE ROOM
+ROOM1    ROOM2    ROOM3...
+ROOM5    ROOM6...
+```
+```json
+// ヘッダー（32バイト）：RoomNameSize（1バイト） | Operation（1バイト） | State（1バイト） | OperationPayloadSize（29バイト）
+// 0, 0, 0, sizeof (payload)
+{
+  "rooms": [
+    room_name1: {
+      members: [member_name1, member_name2...],
+      password_required: true
+    }
+  ]
+}
+```
+- 入室可能なルーム、ルームのメンバ一覧
 - メッセージの暗号化 - TODO
+```json
+// 通常メッセージ
+{
+  "sender": "example sender",
+  "message": "example"
+}
+
+// システム
+// ヘッダー：RoomNameSize（1バイト）| TokenSize（1バイト）
+// operation 1(入室), 2（退室）
+{
+  "sender": "system",
+  "operation": 0,
+  "username": "example,
+}
+```
 
 ### 2023-10-05
 #### 目標
