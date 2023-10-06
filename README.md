@@ -10,18 +10,19 @@
 
 ### 2023-10-06
 #### 目標
-- ルームからの切断について
 #### 決定事項
 #### 共有事項
 #### 今後の予定
+- 次回MTG 10/8 18:00~20:00
 - deploy関係 (server deploy ec2? ecr?, client installer) TODO (Sunday)
 - メッセージの暗号化 - TODO (Sunday)
-1. 入室可能なルーム（パスワード保護の有無）とルームのメンバをサーバからクライアントへ通知
+1. 入室可能なルーム（パスワード保護の有無）とルームのメンバをサーバからクライアントへ通知 TCP
   - 通知のタイミング（TCPの接続確立直後にサーバから送る）　- server (kara), electron (mabuo)
 2. UI kaizen
-  2. Errorのユーザへの通知の仕方
   1. チャット欄にメッセージが増えたら、チャットランそれ自体をスクロール可能にする
+  2. Errorのユーザへの通知の仕方
   3. 入室可能なルーム一覧ページ、チャットルームのメンバ一覧ページ
+2. ルームからの切断について UDP - kara, mabuo
 ```
 CREATE ROOM
 ROOM1    ROOM2    ROOM3...
@@ -45,7 +46,7 @@ ROOM5    ROOM6...
   "sender": "example sender",
   "message": "example"
 }
-// システム
+// システム（送受信）
 // ヘッダー：RoomNameSize（1バイト）| TokenSize（1バイト）
 // operation 1(入室), 2（退室）
 {
