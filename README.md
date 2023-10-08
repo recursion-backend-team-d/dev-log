@@ -19,9 +19,9 @@
 1. 入室可能なルーム（パスワード保護の有無）とルームのメンバをサーバからクライアントへ通知 TCP
   - 通知のタイミング（TCPの接続確立直後にサーバから送る）　- server (kara), electron (mabuo)
 2. UI kaizen
-  1. チャット欄にメッセージが増えたら、チャットランそれ自体をスクロール可能にする
-  2. Errorのユーザへの通知の仕方
-  3. 入室可能なルーム一覧ページ、チャットルームのメンバ一覧ページ
+  - チャット欄にメッセージが増えたら、チャットランそれ自体をスクロール可能にする
+  - Errorのユーザへの通知の仕方
+  - 入室可能なルーム一覧ページ、チャットルームのメンバ一覧ページ
 2. ルームからの切断について UDP - kara, mabuo
 ```
 CREATE ROOM
@@ -33,9 +33,9 @@ ROOM5    ROOM6...
 // 0, 0, 0, sizeof (payload)
 {
   "rooms": [
-    room_name1: {
-      members: [member_name1, member_name2...],
-      password_required: true
+    "room_name1": {
+      "members": ["member_name1", "member_name2"...],
+      "password_required": true
     }
   ]
 }
@@ -44,7 +44,7 @@ ROOM5    ROOM6...
 // 通常メッセージ
 {
   "sender": "example sender",
-  "message": "example"
+  "message": "example",
 }
 // システム（送受信）
 // ヘッダー：RoomNameSize（1バイト）| TokenSize（1バイト）
