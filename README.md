@@ -214,7 +214,7 @@ ROOM5    ROOM6...
 - import secretsでtoken生成
 - プロトコル（statusはHTTP status参照）
 ```json
-// op 1, op 2
+// op 1, op 2, op3
   // サーバの初期化（0）
   {
     "username": "example"
